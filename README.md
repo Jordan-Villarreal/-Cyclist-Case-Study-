@@ -112,15 +112,30 @@ This data cleaning process addresses data issues such as trips spanning over mid
 
 
 
-![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/c8fe7823-af52-4098-af83-985ec1581795)
-
-
-
-
-
 
 ![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/660dd39c-1c5b-49ea-a25a-87b5358a6da0)
 
 
 
      
+
+
+
+5. **User Behavior Analysis for Type of bicycle used:**
+   - The electric and classic bikes are the most popular.
+   - Docked bikes are only used among casual users
+  
+
+
+
+
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/d8112561-cdba-4e90-a3f1-be022ccda900)
+
+
+
+
+
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/98362115-97d1-43a9-9787-af6140782354)
+
