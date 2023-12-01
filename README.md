@@ -136,6 +136,15 @@ This data cleaning process addresses data issues such as trips spanning over mid
 
 
 
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/98362115-97d1-43a9-9787-af6140782354)
+
+
+
+
+
+
+
 # Business Recommendation: Enhancing Cyclistic's Offerings for Diverse User Needs
 
 ## Key Insights:
@@ -202,5 +211,5 @@ Another focus is on family-oriented rides. Offering special promotions and deals
 
 - **Revenue Growth:**
   - Tap into untapped markets, potentially increasing revenue through a variety of membership plans and increased ridership.
-![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/98362115-97d1-43a9-9787-af6140782354)
+
 
