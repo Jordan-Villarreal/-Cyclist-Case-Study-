@@ -55,7 +55,8 @@ This data cleaning process addresses data issues such as trips spanning over mid
 ## Data Exploration: Ride Trends and User Behavior
 
 1. **Popular Start and End Stations**
-
+    - Casual riders tend to take round trips in high tourism and recreational areas.
+    - Members tend to take short point to point trips.
 ![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/0fcc4867-d33e-4fac-bada-b4e35f169f71)
 
 
@@ -75,26 +76,51 @@ This data cleaning process addresses data issues such as trips spanning over mid
 
 
 
-     
-
-3. **Trip Popularity and Duration Analysis:**
-   - Most popular trips are short point-to-point journeys.
-   - Longer trips starting and ending at the same place are potentially for tourism or leisure.
-  
-
-![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/a4859f62-8540-423e-af31-701f834e624d)
 
 
-
-
-
-
-     
-
-4. **User Behavior Analysis for Trip Duration by Day, Month, and Hour:**
-   - Member trips are consistently between 10-15 minutes throughout the year while casual usage is much longer in the temperate month and drops off as the months get colder.
+3. **User Behavior Analysis for Trip Duration by Day, Month, and Hour:**
+   - Member trips are consistently between 10-15 minutes throughout the year while casual usage is much longer in the temperate month and drops off as the 
+     months get colder.
    - There is a spike in longer trips for casual riders during the nicest hours of the day while members consistently stay in the 10-15 minute range.
 
-5. **User Behavior Analysis for Amount of Trips by Day, Month, and Hour:**
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/9212cb33-3c76-4f4b-8497-80eb311d8e20)
+
+
+
+
+
+
+
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/054e81bd-efcb-4624-9eb0-fe6f39323635)
+
+
+
+
+
+
+
+
+4. **User Behavior Analysis for Amount of Trips by Day, Month, and Hour:**
    - Members ride the most during weekdays while casual riders are the opposite, taking trips the most during the weekends and dropping off during the week.
    - Most trips are taken in the warmer months while colder months see a drop in usage from casual riders.
+  
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/c1b7bd78-9864-4cc7-b395-63341c405372)
+
+
+
+
+
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/c8fe7823-af52-4098-af83-985ec1581795)
+
+
+
+
+
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/660dd39c-1c5b-49ea-a25a-87b5358a6da0)
+
+
+
+     
