@@ -56,20 +56,40 @@ This data cleaning process addresses data issues such as trips spanning over mid
 
 1. **Popular Start and End Stations**
 
-![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/cd76f5eb-c288-427c-9cc9-2cf6aaf55094)
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/0fcc4867-d33e-4fac-bada-b4e35f169f71)
 
 
 
 
 
 
-2. **Average Trip Duration by Rider Status and Ride Type:**
+
+2. **Average Trip Duration by Rider Status:**
    - Casual riders tend to take longer trips.
    - Short trips are more common among members.
+  
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/fd6b97e4-e046-4d8f-934a-ee33cad2e08a)
+
+
+
+
+
+
+     
 
 3. **Trip Popularity and Duration Analysis:**
    - Most popular trips are short point-to-point journeys.
    - Longer trips starting and ending at the same place are potentially for tourism or leisure.
+  
+
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/a4859f62-8540-423e-af31-701f834e624d)
+
+
+
+
+
+
+     
 
 4. **User Behavior Analysis for Trip Duration by Day, Month, and Hour:**
    - Member trips are consistently between 10-15 minutes throughout the year while casual usage is much longer in the temperate month and drops off as the months get colder.
