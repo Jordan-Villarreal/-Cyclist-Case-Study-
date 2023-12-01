@@ -1,1 +1,141 @@
+-- What start station is the most popular (Top 10)
 
+SELECT
+  start_station_name,
+  COUNT(*) AS start_count_per_station
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE start_station_name IS NOT NULL
+GROUP BY start_station_name
+ORDER BY start_count_per_station DESC
+LIMIT 10;
+
+-- What end station is the most popular (Top 10)
+
+SELECT
+  end_station_name,
+  COUNT(*) AS end_count_per_station
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE end_station_name IS NOT NULL
+GROUP BY end_station_name
+ORDER BY end_count_per_station DESC
+LIMIT 10;
+
+-- Average trip duration per customer type
+
+SELECT
+  member_casual AS rider_status,
+  AVG(trip_duration_in_minutes) AS average_trip_duration_in_minutes
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY member_casual;
+
+-- What ride type is the most popular overall
+
+SELECT
+  rideable_type,
+  COUNT(DISTINCT ride_id) AS ride_type_count
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_Data_2023
+GROUP BY rideable_type
+ORDER BY ride_type_count DESC;
+
+-- Pull count and avg trip duration of every trip grouped by the customer type and bike type
+
+SELECT
+  rideable_type,
+  member_casual AS rider_status,
+  AVG(trip_duration_in_minutes) AS average_trip_duration_in_minutes,
+  COUNT(*) AS ride_count
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY rideable_type, member_casual
+ORDER BY ride_count DESC;
+
+-- It seems like casual riders take longer trips, but member trips are much more often than short trips.
+
+-- Due to limits with the data, there is no way to know how many trips are taken by a single member or casual user.
+    This makes it difficult to tell how many casual members are repeat users or how often members are taking advantage of their membership.
+    We know that membership is the most profitable to the company. 
+    So we need to explore what things the casual members value vs what members are doing most often.
+
+-- Which trips are the most popular and how long do they take on average?
+
+SELECT
+  start_station_name,
+  end_station_name,
+  COUNT(*) AS trip_count,
+  AVG(trip_duration_in_minutes) AS average_trip_duration
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE start_station_name IS NOT NULL
+  AND end_station_name IS NOT NULL
+GROUP BY start_station_name, end_station_name
+ORDER BY trip_count DESC
+LIMIT 10;
+
+-- Most of these trips are very short point A to point B trips. There are a few outlier trips that are much longer on average. 
+   These longer trips start and end in the same place. My assumption is that these are trips people take to explore the area for tourism or leisure. 
+   I am going to explore that more.
+
+SELECT
+  start_station_name,
+  end_station_name,
+  member_casual,
+  rideable_type,
+  COUNT(*) AS trip_count
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE (start_station_name LIKE "DuSable Lake Shore Dr & Monroe St" AND end_station_name LIKE "DuSable Lake Shore Dr & Monroe St")
+   OR (start_station_name LIKE "Streeter Dr & Grand Ave" AND end_station_name LIKE "Streeter Dr & Grand Ave")
+   OR (start_station_name LIKE "Michigan Ave & Oak St" AND end_station_name LIKE "Michigan Ave & Oak St")
+   OR (start_station_name LIKE "DuSable Lake Shore Dr & Monroe St" AND end_station_name LIKE "Streeter Dr & Grand Ave")
+GROUP BY member_casual, rideable_type, start_station_name, end_station_name
+ORDER BY trip_count DESC;
+
+-- Casual riders are taking considerably more trips that have a longer duration, but now we know they are tourism and leisure trips
+   because they all start or end around places like lakes, aquariums, and museums. 
+   It seems that most members are taking short trips for transportation or delivery, while most casual riders are using the service for fun. 
+   I expect to find that casual members use the service more over weekends and holidays
+   while members use more on weekdays during work and commuting hours. I will explore this more.
+
+-- Number of trips per day and per month grouped by member status
+
+SELECT
+  day,
+  member_casual,
+  COUNT(ride_id) AS total_trips
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY day, member_casual
+ORDER BY member_casual;
+
+SELECT
+  month,
+  member_casual,
+  COUNT(ride_id) AS total_trips
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY month, member_casual
+ORDER BY member_casual;
+
+-- Number of trips per hour
+SELECT
+  EXTRACT(HOUR FROM started_at) AS hour_of_day,
+  member_casual,
+  COUNT(ride_id) AS total_trips
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY hour_of_day, member_casual
+ORDER BY hour_of_day;
+
+-- Now we can also look at average trip per month for members vs casual riders
+
+SELECT
+  month,
+  member_casual,
+  AVG(Trip_Duration_In_Minutes) AS average_trip_duration
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY month, member_casual
+ORDER BY member_casual, month;
+
+-- We can do the same thing for average trip per hour for members vs casual riders
+
+SELECT
+  EXTRACT(HOUR FROM start_time) AS starting_hour,
+  member_casual,
+  AVG(Trip_Duration_In_Minutes) AS average_trip_duration
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+GROUP BY starting_hour, member_casual
+ORDER BY member_casual, starting_hour;
