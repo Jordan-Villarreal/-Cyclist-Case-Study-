@@ -136,6 +136,71 @@ This data cleaning process addresses data issues such as trips spanning over mid
 
 
 
+# Business Recommendation: Enhancing Cyclistic's Offerings for Diverse User Needs
 
+## Key Insights:
+
+### Divergent Usage Patterns:
+
+- **Casual Members:**
+  - Tend to take longer, recreational trips.
+
+- **Members:**
+  - Prefer shorter point-to-point journeys, potentially for daily transportation and working delivery services.
+
+### Untapped Market Potential:
+
+- **Recreational Riding:**
+  - Casual members using bikes for leisure and tourism present an opportunity for specialized offerings.
+
+## Recommendations:
+
+### Targeted Marketing and Recreational Membership:
+
+- Introduce a specialized membership tier for casual riders focusing on tourism and recreational rides.
+- Provide exclusive access to curated routes, promotions for leisure rides, and potentially collaborate with local tourist attractions.
+
+### Exercise-Focused Initiatives:
+
+- Create specialized routes or stations for fitness enthusiasts, possibly incorporating exercise bikes in select locations.
+- Implement new bicycles used for fitness and physical health.
+- Attract members looking to supplement their gym routine or engage in fitness activities, expanding Cyclistic's user base.
+
+### Lake Shore Promotions:
+
+- Direct marketing efforts towards the lake shore, the most popular location for casual riders.
+- Increase brand visibility and attract more casual members, potentially through partnerships with local businesses along the lake shore.
+
+### Promotional Collaborations:
+
+- Collaborate with local businesses such as aquariums and museums to offer promotions for Cyclistic annual memberships.
+- Incentivize casual riders to opt for annual memberships, especially if they supplement gym memberships or align with leisure riding trends.
+
+### Alternative Memberships:
+
+- Implement monthly or seasonal memberships for casual riders who tend to only use the service in warmer months.
+- Create specialized stations and routes that follow along scenic routes for riders that use the service for only recreation.
+
+## Summary:
+
+Casual members seem to use the bicycle service in a completely different way than the members. It seems to me that any casual users who use the service often, naturally choose to become members because it is the more cost-effective choice per trip. In order to convert casual users and create return customers, more effort will need to be put in for the recreational users. I would put special promotions and advertisements in all high recreation areas. I would also work with businesses in those areas to create promotions and deals that market to the consumers.
+
+It also seems to me that although casual users tend to ride for over an hour on average, they are not doing this for exercise. If they were, they would also become members as it is more cost-effective if you take many trips per year. This seems like an untapped market to explore. I would recommend more research in this area.
+
+Another focus is on family-oriented rides. Offering special promotions and deals for family memberships or day passes might encourage more families to convert from casual to membership.
+
+## Expected Outcomes:
+
+- **Diversified Memberships:**
+  - Attract a broader audience by offering membership options tailored to different user preferences.
+
+- **Increased Membership Adoption:**
+  - Encourage casual riders to become annual members through targeted promotions and specialized offerings.
+
+- **Enhanced Brand Loyalty:**
+  - Establish Cyclistic as a versatile service catering to transportation, physical health, and recreational needs.
+
+- **Revenue Growth:**
+  - Tap into untapped markets, potentially increasing revenue through a variety of membership plans and increased ridership.
 ![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/98362115-97d1-43a9-9787-af6140782354)
 
