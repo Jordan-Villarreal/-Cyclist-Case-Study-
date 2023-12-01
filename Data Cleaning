@@ -1,1 +1,143 @@
+-- Create columns to isolate times from dates for easier exploration
 
+-- Isolate Start Date
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN start_date DATE;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET start_date = CAST(started_at AS DATE) 
+WHERE start_date IS NULL;
+
+-- Isolate End Date
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN end_date DATE;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET end_date = CAST(ended_at AS DATE) 
+WHERE end_date IS NULL;
+
+-- Isolate Start Time
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN start_time TIME;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET start_time = CAST(started_at AS TIME) 
+WHERE start_time IS NULL;
+
+-- Isolate End Time
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN end_time TIME;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET end_time = CAST(ended_at AS TIME) 
+WHERE end_time IS NULL;
+
+-- Add a column to isolate the month (this will be used for exploration and data visualization)
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN month INT;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET month = EXTRACT(MONTH FROM started_at) 
+WHERE started_at IS NOT NULL;
+
+-- Add a column to isolate day of the week (this will be used for exploration and data vis)
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN day STRING;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 
+SET day =
+  CASE
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 1 THEN 'SUN'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 2 THEN 'MON'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 3 THEN 'TUES'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 4 THEN 'WED'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 5 THEN 'THURS'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 6 THEN 'FRI'
+    WHEN EXTRACT(DAYOFWEEK FROM TIMESTAMP(started_at)) = 7 THEN 'SAT'
+  END
+WHERE started_at IS NOT NULL;
+
+-- Query to see the amount of days each bike is checked out or the duration of the trip
+
+SELECT
+  start_date,
+  end_date,
+  DATE_DIFF(end_date, start_date, DAY) AS days_bike_checked,
+  start_time,
+  end_time,
+  TIME_DIFF(end_time, start_time, MINUTE) AS duration_in_minutes
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023;
+
+-- In some instances, the bike is checked for more than one day. What's causing this?
+-- Query to see all data for trips that last 1 day or more
+
+SELECT *,
+  DATE_DIFF(end_date, start_date, DAY) AS days_bike_checked
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE DATE_DIFF(end_date, start_date, DAY) >= 1;
+
+-- Query to count the amount of trips coming up as 1 day
+
+SELECT
+  COUNT(CASE WHEN (DATE_DIFF(end_date, start_date, DAY) = 1) THEN 1 END) AS count_of_1_day_trips
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023;
+
+-- Most cases are trips coming up as one day, but are actually shorter durations over midnight. 
+   These will not be deleted because they are legitimate trips.
+-- Query to look at any trips lasting longer than 1 day
+
+SELECT *,
+  DATE_DIFF(end_date, start_date, DAY) AS days_bike_checked
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE DATE_DIFF(end_date, start_date, DAY) > 1;
+
+-- Query to count the amount of trips lasting longer than one day
+
+SELECT
+  COUNT(CASE WHEN (DATE_DIFF(end_date, start_date, DAY) > 1) THEN 1 END) AS count_of_multi_day_trips
+FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023;
+
+-- It seems like any trips lasting longer than a day are bikes that did not get returned to a dock or get returned properly.
+-- Delete any trips with a trip duration of more than one day
+
+DELETE FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE DATE_DIFF(end_date, start_date, DAY) > 1;
+
+-- Add a column that gives the duration of the trip in minutes.
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN Trip_Duration_In_Minutes INT;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+SET Trip_Duration_In_Minutes = CAST(TIME_DIFF(end_time, start_time, MINUTE) AS INT)
+WHERE Trip_Duration_In_Minutes IS NULL;
+
+-- Because some trips elapse over midnight, the query above will not work. I would be omitting many trips that elapse over midnight. 
+    I need to change it so that it does not return a negative value for trips that happen over 12 am. 
+    Instead of using a column that only contains time, I will use a column that includes the date as well. 
+
+ALTER TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 ADD COLUMN Trip_Duration_In_Minutes INT;
+UPDATE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+SET Trip_Duration_In_Minutes = CAST(DATE_DIFF(ended_at, started_at, MINUTE) AS INT)
+WHERE Trip_Duration_In_Minutes IS NULL;
+
+-- Some trips are very short. Most likely, they are not actual trips. 
+    The most likely cause is that, in these instances, bicycles are not being docked correctly.
+    The best way to only clean up the faulty data is to delete short trips that start and end at the same station. 
+    We want to keep legitimate trips that start at one station and end at another.
+
+DELETE FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE Trip_Duration_In_Minutes <= 2
+  AND start_station_name IS NOT NULL
+  AND end_station_name IS NOT NULL
+  AND start_station_name NOT LIKE end_station_name;
+
+-- 123,675 Rows are deleted
+
+-- Many trips do not record the station information. 
+   Instead of deleting all data with missing station information,
+   we can query to only remove trips where the starting location and ending location does not change.
+   We will do this using the latitude and longitude. One degree of latitude and longitude is roughly 69 miles. 
+   If we divide that, we get 0.0144927536 degrees = to one mile.
+   We can round to 0.0145. We will delete any trips under 2 minutes long that ranged less than 1 mile.
+
+DELETE FROM deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023
+WHERE Trip_Duration_In_Minutes <= 2
+  AND ABS(start_Lat - end_lat) <= 0.0145
+  AND ABS(start_lng - end_lng) <= 0.0145;
+
+-- 157,973 Rows are deleted
+
+-- Now we are working with legitimate trips and have not deleted excess data.
