@@ -55,6 +55,7 @@ This data cleaning process addresses data issues such as trips spanning over mid
 ## Data Exploration: Ride Trends and User Behavior
 
 1. **Popular Start and End Stations**
+![image](https://github.com/Jordan-Villarreal/-Cyclist-Case-Study-/assets/126938990/cd76f5eb-c288-427c-9cc9-2cf6aaf55094)
 
 2. **Average Trip Duration by Rider Status and Ride Type:**
    - Casual riders tend to take longer trips.
