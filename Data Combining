@@ -1,1 +1,28 @@
+-- Creates a view that includes all tables that we can query from
 
+CREATE VIEW Cyclist_2023.Ride_Share_Data_2023 AS
+  SELECT * FROM Cyclist_2023.Ride_Share_Data_January_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_February_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_March_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_April_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_May_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_June_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_July_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_August_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_September_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_October_2023;
+
+-- In order to clean data, create a table consisting of all data
+
+CREATE TABLE deft-citizen-382001.Cyclist_2023.Ride_Share_All_Data_2023 AS (
+  SELECT * FROM Cyclist_2023.Ride_Share_Data_January_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_February_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_March_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_April_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_May_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_June_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_July_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_August_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_September_2023
+  UNION ALL SELECT * FROM Cyclist_2023.Ride_Share_Data_October_2023
+);
